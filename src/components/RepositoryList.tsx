@@ -3,8 +3,14 @@ import { RepositoryItem } from './RepositoryItem';
 
 import '../styles/repositories.scss';
 
+interface Repository {
+    name: string;
+    description: string;
+    html_url: string;
+}
+
 export function RepositoryList() {
-    const [repositories, setRepositories] = useState([]); // toda vez que um estado muda, o react renderiza o componente novamente 
+    const [repositories, setRepositories] = useState<Repository[]>([]); // toda vez que um estado muda, o react renderiza o componente novamente 
 
     useEffect(() => {   
         fetch('https://api.github.com/orgs/rocketseat/repos').then(response => response.json())
@@ -15,7 +21,7 @@ export function RepositoryList() {
         <section className="repository-list">
             <h1>Lista de Repositórios</h1>
 
-            <ul>
+            <ul> 
                 {repositories.map(repository => {
                     return <RepositoryItem key={repository.name} repository={repository} />
                 })}

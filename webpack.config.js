@@ -7,13 +7,13 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 module.exports = {
     mode: isDevelopment ? 'development' : 'production',
     devtool: isDevelopment ? 'eval-source-map' : 'source-map', //sourcemap: limpar o código para ler somente react
-    entry: path.resolve(__dirname, 'src', 'index.jsx'), // arquivo que vai ser lido
+    entry: path.resolve(__dirname, 'src', 'index.tsx'), // arquivo que vai ser lido
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js' // nome do arquivo
     },
     resolve: {
-        extensions: ['.js', '.jsx'], // extensões de arquivos que podem ser lidos
+        extensions: ['.js', '.jsx', '.ts', '.tsx'], // extensões de arquivos que podem ser lidos
     },
     devServer: {
         //contentBase: path.resolve(__dirname, 'public'), 
@@ -31,7 +31,7 @@ module.exports = {
     module: { // como a aplicação irá se comportar com vários tipos de arquivos
         rules: [
             {
-                test: /\.jsx$/, // true | false: é js ou não
+                test: /\.(j|t)sx$/, // true | false: é js ou não
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
